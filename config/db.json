@@ -3,7 +3,7 @@
       "username": "root",
       "password": "password",
       "database": "iot",
-      "host": "3.22.74.141",
+      "host": "13.59.119.194",
       "dialect": "mysql",
       "define": {
         "timestamps": true
