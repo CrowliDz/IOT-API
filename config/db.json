@@ -1,0 +1,30 @@
+{
+    "development": {
+      "username": "root",
+      "password": "password",
+      "database": "iot",
+      "host": "3.22.74.141",
+      "dialect": "mysql",
+      "define": {
+        "timestamps": true
+      },
+      "timezone" : "-06:00"
+    },
+    "test": {
+      "username": "root",
+      "password": "password",
+      "database": "midas",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "define": {
+        "timestamps": true
+      }
+    },
+    "production": {
+      "use_env_variable": "DATABASE_URL",
+      "dialect": "mysql",
+      "define": {
+        "timestamps": true
+      }
+    }
+  }
