@@ -8,7 +8,7 @@ const _sequelize = models.sequelize;
 const op = sequelize.Op;
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
-const SECRET_KEY = 'SECRETKEY_ICMA_AUTOMATION1234';
+const SECRET_KEY = 'SECRETKEY_IOT_APP';
 const jwt = require('jsonwebtoken');
 
 const USUARIO_ERROR = {

@@ -1,7 +1,7 @@
 'use strict'
 
 const models = require('../models');
-const Luz = require('../models').Luz
+const Maquina = require('../models').Maquina
 const sequelize = models.Sequelize;
 let op = sequelize.Op;
 
@@ -62,13 +62,13 @@ module.exports = {
             let busqueda = req.query.busqueda;
             if (busqueda != '') {
                 query = {
-                    id_luz: {
+                    id_maquina: {
                         [op.substring]: busqueda
                     }
                 }
             }
-            let response = await Luz.findAll({
-                attributes: ['id_luz', 'nombre_luz','estado_luz', 'fecha_luz', 'code_luz'],
+            let response = await Maquina.findAll({
+                attributes: ['id_maquina', 'nombre_maquina','estado_maquina', 'fecha_maquina', 'codigo_maquina'],
                 where: query,
             })
             if (response) {
@@ -99,7 +99,7 @@ module.exports = {
     create: async function (req, res) {
         try {
             console.log(req.body)
-            let newl = new Luz(req.body);
+            let newl = new Maquina(req.body);
             const response = await newl.save();
             res.status(200).send({ code: 200, status: response.status });
         } catch (error) {
@@ -115,8 +115,8 @@ module.exports = {
 
     delete: async function (req, res) {
         try {
-            const response = await Luz.destroy({
-                where: { id_luz: req.params.id }
+            const response = await Maquina.destroy({
+                where: { id_maquina: req.params.id }
             })
             res.status(200).send({ code: 200, message: ' eliminado', response })
         } catch (error) {
@@ -132,8 +132,8 @@ module.exports = {
 
     update: async function (req, res) {
         try {
-            const response = await Luz.update(req.body, {
-                where: { id_luz: req.params.id }
+            const response = await Maquina.update(req.body, {
+                where: { id_maquina: req.params.id }
             })
             res.status(200).send({ code: 200, message: ' modificado', response })
         } catch (error) {
@@ -151,7 +151,7 @@ module.exports = {
 
     read: async function (req, res) {
         try {
-            let response = await Luz.findOne({ where: { id_luz: req.params.id } });
+            let response = await Maquina.findOne({ where: { id_maquina: req.params.id } });
             if (response) {
                 res.status(200).send({ code: 200, response });
             } else {

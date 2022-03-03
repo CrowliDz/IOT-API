@@ -1,20 +1,20 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    var Luz = sequelize.define('Luz', {
-        id_luz: {
+    var Maquina = sequelize.define('Maquina', {
+        id_maquina: {
             primaryKey: true,
             type: DataTypes.INTEGER(11),
         },
-        nombre_luz: {
+        nombre_maquina: {
             type: DataTypes.STRING,
         },
-        estado_luz: {
+        estado_maquina: {
             type: DataTypes.INTEGER(11),
         },
-        fecha_luz: {
+        fecha_maquina: {
             type: DataTypes.DATE,
         },
-        code_luz: {
+        codigo_maquina: {
             type: DataTypes.STRING,
         },
     },
@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
             paranoid: false,
             underscored: false,
             freezeTableName: true,
-            tableName: 'luz'
+            tableName: 'maquina'
         });
 
-    return Luz;
+    return Maquina;
 }
