@@ -1,9 +1,9 @@
 {
     "development": {
       "username": "root",
-      "password": "password",
+      "password": "iot123",
       "database": "iot",
-      "host": "3.16.1.247",
+      "host": "52.14.16.49",
       "dialect": "mysql",
       "define": {
         "timestamps": true
