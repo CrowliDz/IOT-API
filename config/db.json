@@ -1,7 +1,7 @@
 {
     "development": {
       "username": "root",
-      "password": "iot123",
+      "password": "Iot123456789!",
       "database": "iot",
       "host": "52.14.16.49",
       "dialect": "mysql",
