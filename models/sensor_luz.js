@@ -5,7 +5,7 @@ module.exports = (sequelize, Datatypes) => {
             primaryKey: true,
             type: Datatypes.INTEGER(11)
         },
-        procentaje_sensorluz: {
+        code_sensorluz: {
             type: Datatypes.STRING,
             allowNull: false
         },

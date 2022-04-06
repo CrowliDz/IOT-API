@@ -61,44 +61,30 @@ module.exports = {
             let busqueda = req.query.busqueda;
             if (busqueda != '') {
                 query = {
-                    nombreperfil: {
-                    [op.substring]: busqueda
-                  }
+                    id_luz: {
+                        [op.substring]: busqueda
+                    }
                 }
-              }
-            let perfilConfig = await PerfilConfig.findAll({
-                attributes: ['idperfil', 'nombreperfil', 'descripcion', 'automanual'],
+            }
+            let response = await Luz.findAll({
+                attributes: ['id_sensorluz', 'code_sensorluz','estado_sensorluz', 'fecha_sensorluz'],
                 where: query,
-                include: [{
-                    model: ConfiguracionModulo,
-                    required: false,
-                    include: [
-                        {
-                            model: Evento,
-                            require: false,
-                            attributes: ['idevento', 'evento', 'color']
-                        }
-                    ],
-                    order: [
-                        ['entrada', 'DESC']
-                    ]
-                }]
             })
-            if (perfilConfig) {
+            if (response) {
                 res.status(200).send({
-                    code: 200, perfilConfig
+                    code: 200, response
                 })
             } else {
-                throw new PerfilConfigError(PERFIL_CONFIG_ERROR.PERFIL_NOT_FOUND)
+                throw new Error(ERROR.NOT_FOUND)
             }
 
         }
         catch (error) {
             console.error(error)
-            if (error instanceof PerfilConfigError) {
+            if (error instanceof Error) {
                 res.status(error.status).send(error)
             } else {
-                res.status(500).send({ ...PERFIL_CONFIG_ERROR.ERROR })
+                res.status(500).send({ ...ERROR.ERROR })
             }
 
         }
