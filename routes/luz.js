@@ -9,6 +9,9 @@ const { ensureAuth } = auth;
 router.route('/sendLight')
 .post(ensureAuth,luz.sendLight);
 
+router.route('/P_EstadoYCodeX')
+.get(ensureAuth,luz.P_EstadoYCodeX);
+
 router.route('/get')
 .get(ensureAuth,luz.get)
 .post(ensureAuth,luz.create);

@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         codigo_maquina: {
             type: DataTypes.STRING,
         },
+        id_luz: {
+            type: DataTypes.INTEGER(11),
+            references:{
+                model:'luz',
+                key: 'id_luz'
+                }
+        },
     },
         {
             defaultScope: {
@@ -28,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
             freezeTableName: true,
             tableName: 'maquina'
         });
+
+        Maquina.associate = function (models) {
+            Maquina.belongsTo(models.Luz, { foreignKey: 'id_luz' });
+        };
 
     return Maquina;
 }

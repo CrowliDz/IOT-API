@@ -154,7 +154,7 @@ module.exports = {
 
     },
 
-    getUsuariosName: async function (req, res) {
+    P_EstadoYCodeX: async function (req, res) {
         try {
           const response = await _sequelize.query('CALL nameus();');
           if(response){

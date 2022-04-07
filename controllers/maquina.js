@@ -2,6 +2,7 @@
 
 const models = require('../models');
 const Maquina = require('../models').Maquina
+const Luz = require('../models').Luz
 const sequelize = models.Sequelize;
 let op = sequelize.Op;
 
@@ -68,8 +69,13 @@ module.exports = {
                 }
             }
             let response = await Maquina.findAll({
-                attributes: ['id_maquina', 'nombre_maquina','estado_maquina', 'fecha_maquina', 'codigo_maquina'],
+                attributes: ['id_maquina', 'nombre_maquina','estado_maquina', 'fecha_maquina', 'codigo_maquina','id_luz'],
                 where: query,
+                include: [{
+                    model: Luz,
+                    required: true,
+                    attributes: ['id_luz', 'nombre_luz']
+                }]
             })
             if (response) {
                 res.status(200).send({

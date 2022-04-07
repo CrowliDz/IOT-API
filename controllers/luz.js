@@ -3,6 +3,7 @@
 const models = require('../models');
 const Luz = require('../models').Luz
 const sequelize = models.Sequelize;
+const  _sequelize = models.sequelize;
 let op = sequelize.Op;
 
 
@@ -70,6 +71,7 @@ module.exports = {
             let response = await Luz.findAll({
                 attributes: ['id_luz', 'nombre_luz','estado_luz', 'fecha_luz', 'code_luz'],
                 where: query,
+                
             })
             if (response) {
                 res.status(200).send({
@@ -90,6 +92,29 @@ module.exports = {
 
         }
     },
+
+    P_EstadoYCodeX: async function (req, res) {
+        try {
+          const response = await _sequelize.query('CALL P_EstadoYCodeX();');
+          if (response) {
+            res.status(200).send({
+                code: 200, response
+            })
+        } else {
+            throw new Error(ERROR.NOT_FOUND)
+        }
+
+    }
+    catch (error) {
+        console.error(error)
+        if (error instanceof Error) {
+            res.status(error.status).send(error)
+        } else {
+            res.status(500).send({ ...ERROR.ERROR })
+        }
+
+    }
+      },
 
     sendLight: async function (req, res) {
         console.log(req.body.topic)
