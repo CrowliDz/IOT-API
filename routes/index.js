@@ -5,6 +5,7 @@ const usuario = require('./usuario')
 const sensor_luz = require('./sensor_luz')
 const luz = require('./luz')
 const maquina = require('./maquina')
+const configus = require('./configus')
 
 
 //all of the routing will be done here
@@ -16,6 +17,7 @@ module.exports = function (app) {
     app.use('/usuario', usuario),
     app.use('/sensor_luz', sensor_luz),
     app.use('/luz', luz),
+    app.use('/configus', configus),
     app.use('/maquina', maquina),
 
     app.use(router)

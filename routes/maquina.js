@@ -9,6 +9,12 @@ const { ensureAuth } = auth;
 router.route('/sendLight')
 .post(ensureAuth,maquina.sendLight);
 
+router.route('/get2')
+.get(ensureAuth,maquina.get2);
+
+router.route('/up/:id')
+.put(ensureAuth,maquina.update2);
+
 router.route('/get')
 .get(ensureAuth,maquina.get)
 .post(ensureAuth,maquina.create);

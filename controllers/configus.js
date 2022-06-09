@@ -1,9 +1,9 @@
 'use strict'
 
 const models = require('../models');
-const Maquina = require('../models').Maquina
-const Luz = require('../models').Luz
+const Configus = require('../models').Configus
 const sequelize = models.Sequelize;
+const  _sequelize = models.sequelize;
 let op = sequelize.Op;
 
 
@@ -63,20 +63,15 @@ module.exports = {
             let busqueda = req.query.busqueda;
             if (busqueda != '') {
                 query = {
-                    id_maquina: {
+                    id_config: {
                         [op.substring]: busqueda
                     }
                 }
             }
-            let response = await Maquina.findAll({
-                attributes: ['id_maquina', 'nombre_maquina','estado_maquina', 'fecha_maquina', 'codigo_maquina','id_luz'],
+            let response = await Configus.findAll({
+                attributes: ['id_config', 'alarma_config','min_config', 'grafica_config', 'id_usuario', 'vinculo_config'],
                 where: query,
-                required: false,
-                include: [{
-                    model: Luz,
-                    required: false,
-                    attributes: ['id_luz', 'nombre_luz']
-                }]
+                
             })
             if (response) {
                 res.status(200).send({
@@ -98,40 +93,28 @@ module.exports = {
         }
     },
 
-    get2: async function (req, res) {
+    P_ObjetosEnFuncion: async function (req, res) {
         try {
-            let query = {};
-            let busqueda = req.query.busqueda;
-            if (busqueda != '') {
-                query = {
-                    id_luz: 
-                        busqueda
-                    
-                }
-            }
-            let response = await Maquina.findAll({
-                attributes: ['id_maquina', 'nombre_maquina','estado_maquina', 'fecha_maquina', 'codigo_maquina','id_luz'],
-                where: query,
+          const response = await _sequelize.query('CALL P_ObjetosEnFuncion();');
+          if (response) {
+            res.status(200).send({
+                code: 200, response
             })
-            if (response) {
-                res.status(200).send({
-                    code: 200, response
-                })
-            } else {
-                throw new Error(ERROR.NOT_FOUND)
-            }
-
+        } else {
+            throw new Error(ERROR.NOT_FOUND)
         }
-        catch (error) {
-            console.error(error)
-            if (error instanceof Error) {
-                res.status(error.status).send(error)
-            } else {
-                res.status(500).send({ ...ERROR.ERROR })
-            }
 
+    }
+    catch (error) {
+        console.error(error)
+        if (error instanceof Error) {
+            res.status(error.status).send(error)
+        } else {
+            res.status(500).send({ ...ERROR.ERROR })
         }
-    },
+
+    }
+      },
 
     sendLight: async function (req, res) {
         console.log(req.body.topic)
@@ -141,7 +124,7 @@ module.exports = {
     create: async function (req, res) {
         try {
             console.log(req.body)
-            let newl = new Maquina(req.body);
+            let newl = new Configus(req.body);
             const response = await newl.save();
             res.status(200).send({ code: 200, status: response.status });
         } catch (error) {
@@ -157,8 +140,8 @@ module.exports = {
 
     delete: async function (req, res) {
         try {
-            const response = await Maquina.destroy({
-                where: { id_maquina: req.params.id }
+            const response = await Configus.destroy({
+                where: { id_config: req.params.id }
             })
             res.status(200).send({ code: 200, message: ' eliminado', response })
         } catch (error) {
@@ -174,25 +157,8 @@ module.exports = {
 
     update: async function (req, res) {
         try {
-            const response = await Maquina.update(req.body, {
-                where: { id_maquina: req.params.id }
-            })
-            res.status(200).send({ code: 200, message: ' modificado', response })
-        } catch (error) {
-            console.error(error)
-            if (error instanceof Error) {
-                res.status(error.status).send(error)
-            } else {
-                console.log(error);
-                res.status(500).send({ code: 500, message: 'Something Went Wrong' })
-            }
-        }
-    },
-
-    update2: async function (req, res) {
-        try {
-            const response = await Maquina.update(req.body, {
-                where: { id_luz: req.params.id }
+            const response = await Configus.update(req.body, {
+                where: { id_config: req.params.id }
             })
             res.status(200).send({ code: 200, message: ' modificado', response })
         } catch (error) {
@@ -210,7 +176,7 @@ module.exports = {
 
     read: async function (req, res) {
         try {
-            let response = await Maquina.findOne({ where: { id_maquina: req.params.id } });
+            let response = await Configus.findOne({ where: { id_config: req.params.id } });
             if (response) {
                 res.status(200).send({ code: 200, response });
             } else {

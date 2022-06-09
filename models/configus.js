@@ -1,21 +1,24 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    var Luz = sequelize.define('Luz', {
-        id_luz: {
+    var Configus = sequelize.define('Configus', {
+        id_config: {
             primaryKey: true,
             type: DataTypes.INTEGER(11),
         },
-        nombre_luz: {
-            type: DataTypes.STRING,
-        },
-        estado_luz: {
+        alarma_config: {
             type: DataTypes.INTEGER(11),
         },
-        fecha_luz: {
-            type: DataTypes.DATE,
+        min_config: {
+            type: DataTypes.INTEGER(11),
         },
-        code_luz: {
-            type: DataTypes.STRING,
+        grafica_config: {
+            type: DataTypes.INTEGER(11),
+        },
+        id_usuario: {
+            type: DataTypes.INTEGER(11),
+        },
+        vinculo_config: {
+            type: DataTypes.INTEGER(11),
         },
     },
         {
@@ -26,10 +29,8 @@ module.exports = (sequelize, DataTypes) => {
             paranoid: false,
             underscored: false,
             freezeTableName: true,
-            tableName: 'luz'
+            tableName: 'configus'
         });
 
-       
-
-    return Luz;
+    return Configus;
 }

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         id_luz: {
             type: DataTypes.INTEGER(11),
             references:{
-                model:'luz',
+                model:'Luz',
                 key: 'id_luz'
                 }
         },
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
         Maquina.associate = function (models) {
-            Maquina.belongsTo(models.Luz, { foreignKey: 'id_luz' });
+            Maquina.belongsTo(models.Luz, { foreignKey: 'id_luz' ,  onDelete: 'cascade' });
         };
 
     return Maquina;
